@@ -1,9 +1,44 @@
 # Alexander Gutev
 
-I'm a software developer and have written a couple of open source
-projects.
+I'm an open source software developer who's authored a number of
+project which have seen moderate usage:
 
-The following is a portfolio of my projects.
+# Key Projects
+
+## Common Lisp Utilities
+
+Common Lisp is my go to language for experimenting with new
+ideas. I've written a number of utilities which are mostly aimed at
+enhancing the language and rectifying its deficiencies.
+
+- [**generic-cl**](https://github.com/alex-gutev/generic-cl)
+
+  A library which provides a generic function interface to functions
+  in the Common Lisp standard, allowing them to be extended to
+  user-defined classes. This includes comparison functions, arithmetic
+  functions and sequence operations.
+
+- [**static-dispatch**](https://github.com/alex-gutev/static-dispatch)
+
+  A library which allows methods of Common Lisp generic functions to
+  be chosen at compile-time (based on compile-time type declarations)
+  rather than at runtime.
+
+  This library is used by **generic-cl** in order for the generic
+  function interface to be close to the same speed as the non-generic,
+  and non-extensible, functions in the standard.
+
+- [**cl-environments**](https://github.com/alex-gutev/cl-environments)
+
+  Portability library which provides the [CLTL2 Environment Access
+  API](https://www.cs.cmu.edu/Groups/AI/html/cltl/clm/node102.html),
+  for retrieving information about variables, functions and
+  declarations from environment objects, on all implementations.
+
+- [**cl-form-types**](https://github.com/alex-gutev/cl-form-types)
+
+  A library for determining the return value types of Common Lisp
+  forms, based on information contained in the syntactic environment.
 
 ## Applications
 
@@ -22,30 +57,3 @@ The following is a portfolio of my projects.
   a work in progress.
 
 
-## Common Lisp Utilities
-
-Common Lisp is my go to language for experimenting with new
-ideas. I've written a number of utilities which are mostly aimed at
-enhancing the language and rectifying its deficiencies.
-
-- [**generic-cl**](https://github.com/alex-gutev/generic-cl)
-
-  A library which provides an extensible generic function interface to
-  standard Common Lisp functions which are currently not implemented
-  as generic functions. This includes comparison functions, arithmetic
-  functions and sequence operations.
-
-  _Still in early stages of development._
-
-- [**static-dispatch**](https://github.com/alex-gutev/static-dispatch)
-
-  A library which allows methods of Common Lisp generic functions to
-  be chosen at compile-time (based on compile-time type declarations)
-  rather than at runtime.
-
-- [**cl-environments**](https://github.com/alex-gutev/cl-environments)
-
-  A cross-implementation library for obtaining information about the
-  lexical environment, such as the variable bindings, function
-  bindings and type declarations which are in effect, from within
-  macros and compiler-macros.
