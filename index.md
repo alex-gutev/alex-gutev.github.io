@@ -65,7 +65,7 @@ enhancing the language and rectifying its deficiencies.
 
   A programming language based on bindings.
 
-  Some releases are available however is in very early stages of
+  Some releases are available however it is in very early stages of
   development, with a lot of functionality yet to be completed before
   it becomes usable for real world problems. Likely to change
   drastically between releases.
