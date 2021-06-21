@@ -70,8 +70,6 @@ enhancing the language and rectifying its deficiencies.
 
 ## Applications
 
-### Work in Progress
-
 - [**NuCommander**](/nucommander-gtk) _(Work in progress)_
 
   A fast small orthodox file manager.
