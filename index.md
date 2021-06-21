@@ -40,6 +40,23 @@ enhancing the language and rectifying its deficiencies.
   A library for determining the return value types of Common Lisp
   forms, based on information contained in the syntactic environment.
 
+## System Utilities
+
+- [**oaproxy**](https://github.com/alex-gutev/oaproxy)
+
+  A local IMAP/SMTP proxy server which provides OAUTH2 authentication
+  functionality to email clients which don't support it natively.
+
+  This server runs locally between your email client and the IMAP/SMTP
+  server, and performs authentication via OAUTH2 with the server
+  whilst exposing the traditional username and password authentication
+  to the client. This allows any email client to be used to connect to
+  service provides which only support OAUTH2 authentication.
+
+  Integrates with the [Gnome Online
+  Accounts](https://wiki.gnome.org/Projects/GnomeOnlineAccounts)
+  system.
+
 ## Applications
 
 - [**NuCommander**](/nucommander-gtk) - A fast small orthodox file
