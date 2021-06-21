@@ -57,20 +57,27 @@ enhancing the language and rectifying its deficiencies.
   Accounts](https://wiki.gnome.org/Projects/GnomeOnlineAccounts)
   system.
 
+## Programming Languages
+
+### Work in Progress
+
+- [**Tridash**](http://github.com/alex-gutev/tridash)
+
+  A programming language based on bindings.
+
+  Some releases are available however is in very early stages of
+  development, with a lot of functionality yet to be completed before
+  it becomes usable for real world problems. Likely to change
+  drastically between releases.
+
 ## Applications
 
-- [**NuCommander**](/nucommander-gtk) - A fast small orthodox file
-  manager.
+### Work in Progress
+
+- [**NuCommander**](/nucommander-gtk)
+
+  A fast small orthodox file manager.
 
   _Still a work in progress, however the first release is coming
   soon._
-
-## Programming Languages
-
-- [**Tridash**](http://github.com/alex-gutev/tridash) - A programming
-  language based on bindings.
-
-  Releases available however the documentation and tutorials are still
-  a work in progress.
-
 
