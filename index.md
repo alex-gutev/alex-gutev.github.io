@@ -59,7 +59,7 @@ enhancing the language and rectifying its deficiencies.
 
 ## Programming Languages
 
-- [**Tridash**](http://github.com/alex-gutev/tridash) _Work in progress_
+- [**Tridash**](http://github.com/alex-gutev/tridash) _(Work in progress)_
 
   A programming language based on bindings.
 
@@ -72,7 +72,7 @@ enhancing the language and rectifying its deficiencies.
 
 ### Work in Progress
 
-- [**NuCommander**](/nucommander-gtk) _Work in progress_
+- [**NuCommander**](/nucommander-gtk) _(Work in progress)_
 
   A fast small orthodox file manager.
 
