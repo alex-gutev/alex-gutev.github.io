@@ -42,7 +42,10 @@ enhancing the language and rectifying its deficiencies.
   A library for determining the return value types of Common Lisp
   forms, based on information contained in the syntactic environment.
 
-## Reactive Programming
+## Live Cells Project
+
+Live Cells is a series of reactive programming libraries for various languages which aim to make reactive programming
+simpler and more accessible.
 
 - [**Live Cells**](https://livecell.gutev.dev)
 
@@ -50,9 +53,9 @@ enhancing the language and rectifying its deficiencies.
 
 - [**Live Cells C++**](https://gutev.dev/live_cells_cpp)
 
-  A reactive programming library for C++ ported from Live Cells for Dart.
+  Reactive programming for C++
 
 - [**Live Cells Python**](https://gutev.dev/live_cells_py)
 
-  A reactive programming library for Python proted from Live Cells for Dart.
+  Reactive programming for Python
 
