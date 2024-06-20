@@ -7,7 +7,7 @@ project which have seen moderate usage:
 
 # Key Projects
 
-## Common Lisp Utilities
+## Common Lisp Libraries
 
 Common Lisp is my go to language for experimenting with new
 ideas. I've written a number of utilities which are mostly aimed at
@@ -42,37 +42,17 @@ enhancing the language and rectifying its deficiencies.
   A library for determining the return value types of Common Lisp
   forms, based on information contained in the syntactic environment.
 
-## System Utilities
+## Reactive Programming
 
-- [**oaproxy**](https://github.com/alex-gutev/oaproxy)
+- [**Live Cells**](https://livecell.gutev.dev)
 
-  A local IMAP/SMTP proxy server which provides OAUTH2 authentication
-  functionality to email clients which don't support it natively.
+  A reactive programming library for Dart and Flutter aiming to simplify application state management and synchronization.
 
-  This server runs locally between your email client and the IMAP/SMTP
-  server, and performs authentication via OAUTH2 with the server
-  whilst exposing the traditional username and password authentication
-  to the client. This allows any email client to be used to connect to
-  service provides which only support OAUTH2 authentication.
+- [**Live Cells C++**](https://gutev.dev/live_cells_cpp)
 
-  Integrates with the [Gnome Online
-  Accounts](https://wiki.gnome.org/Projects/GnomeOnlineAccounts)
-  system.
+  A reactive programming library for C++ ported from Live Cells for Dart.
 
-## Programming Languages
+- [**Live Cells Python**](https://gutev.dev/live_cells_py)
 
-- [**Tridash**](http://github.com/alex-gutev/tridash) _(Work in progress)_
-
-  A programming language based on bindings.
-
-  Some releases are available however it is in very early stages of
-  development, with a lot of functionality yet to be completed before
-  it becomes usable for real world problems. Likely to change
-  drastically between releases.
-
-## Applications
-
-- [**NuCommander**](/nucommander-gtk) _(Work in progress)_
-
-  A fast small orthodox file manager.
+  A reactive programming library for Python proted from Live Cells for Dart.
 
