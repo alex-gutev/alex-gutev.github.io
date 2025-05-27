@@ -1,7 +1,7 @@
 # Alexander Gutev
 
-I'm an open source software developer who's authored a number of
-project which have seen moderate usage:
+I'm a software software developer who's authored a number of
+open source [projects](https://github.com/alex-gutev) that have seen moderate usage:
 
 <iframe src="https://github.com/sponsors/alex-gutev/card" title="Sponsor alex-gutev" height="225" width="600" style="border: 0;"></iframe>
 
