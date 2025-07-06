@@ -5,7 +5,25 @@ open source [projects](https://github.com/alex-gutev) that have seen moderate us
 
 <iframe src="https://github.com/sponsors/alex-gutev/card" title="Sponsor alex-gutev" height="225" width="600" style="border: 0;"></iframe>
 
-# Key Projects
+I'm also a researcher in the field of Computer Vision and have made contributions to the following fields:
+
+* Human Action Recognition
+* Object Tracking
+* Machine Learning for Video
+
+# Key Publications
+
+* A Fused Modality Human Action Recognition System Based on Motion Saliency in RGBD Videos<br/>
+  Alexander Gutev, Carl James Debono<br/>
+  *AICCONF25, 2025*
+
+* [Motion Saliency Based Human Action Recognition in RGBD Videos](https://ieeexplore.ieee.org/document/10793009)<br/>
+  Alexander Gutev, Carl James Debono<br/>
+  *ICCP, 2024*
+
+The full list of publications is available on my [IEEEXplore profile](https://ieeexplore.ieee.org/author/37087040722).
+
+# Key Open Source Projects
 
 ## Common Lisp Libraries
 
