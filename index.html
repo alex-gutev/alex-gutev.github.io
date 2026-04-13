@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Alexander Gutev — Computer Vision & AI Research</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0a;
+    --surface: #111111;
+    --surface2: #1a1a1a;
+    --border: rgba(255,255,255,0.08);
+    --border-accent: rgba(255,255,255,0.18);
+    --text: #f0ede8;
+    --muted: #888880;
+    --accent: #c8f564;
+    --accent2: #64c8f5;
+    --font-display: 'Syne', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+    --font-serif: 'Lora', serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-display);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 3rem;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-size: 1rem; font-weight: 700; letter-spacing: 0.05em;
+    color: var(--accent); text-decoration: none; font-family: var(--font-mono);
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none; font-size: 0.8rem;
+    font-family: var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  /* ─── HERO ─── */
+  #hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 8rem 3rem 5rem;
+    position: relative;
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .hero-grid-bg {
+    position: absolute; inset: 0; pointer-events: none;
+    background-image:
+      linear-gradient(rgba(200,245,100,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,245,100,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%);
+  }
+  .hero-eyebrow {
+    font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem;
+    opacity: 0; animation: fadeUp 0.6s 0.1s forwards;
+  }
+  .hero-name {
+    font-size: clamp(3.5rem, 10vw, 8rem); font-weight: 800; line-height: 0.95;
+    letter-spacing: -0.03em; margin-bottom: 1.5rem;
+    opacity: 0; animation: fadeUp 0.7s 0.25s forwards;
+  }
+  .hero-name .line2 { color: var(--muted); }
+  .hero-desc {
+    max-width: 520px; font-size: 1.05rem; color: var(--muted);
+    font-family: var(--font-serif); font-style: italic; line-height: 1.7;
+    margin-bottom: 2.5rem;
+    opacity: 0; animation: fadeUp 0.7s 0.4s forwards;
+  }
+  .hero-links {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    opacity: 0; animation: fadeUp 0.7s 0.55s forwards;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.7rem 1.4rem; border-radius: 2px; font-family: var(--font-mono);
+    font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase;
+    text-decoration: none; transition: all 0.2s; cursor: pointer; border: none;
+  }
+  .btn-primary {
+    background: var(--accent); color: #0a0a0a; font-weight: 500;
+  }
+  .btn-primary:hover { background: #d6ff70; }
+  .btn-outline {
+    background: transparent; color: var(--text);
+    border: 1px solid var(--border-accent);
+  }
+  .btn-outline:hover { border-color: var(--text); }
+  .btn-sponsor {
+    background: rgba(255, 100, 130, 0.12); color: #ff6482;
+    border: 1px solid rgba(255, 100, 130, 0.35);
+  }
+  .btn-sponsor:hover { background: rgba(255, 100, 130, 0.22); border-color: #ff6482; }
+
+  /* ─── SECTIONS ─── */
+  section { padding: 6rem 3rem; border-bottom: 1px solid var(--border); }
+  .section-label {
+    font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 1rem;
+  }
+  .section-title {
+    font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; letter-spacing: -0.03em;
+    line-height: 1.05; margin-bottom: 3rem;
+  }
+  .section-title .dim { color: var(--muted); }
+  .max-w { max-width: 900px; margin: 0 auto; }
+
+  /* ─── ABOUT ─── */
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;
+  }
+  .about-text p {
+    font-family: var(--font-serif); font-size: 1.05rem; color: #b8b5b0;
+    line-height: 1.8; margin-bottom: 1.2rem;
+  }
+  .about-text p:last-child { margin-bottom: 0; }
+  .about-meta { display: flex; flex-direction: column; gap: 1.5rem; }
+  .meta-block { border-left: 2px solid var(--accent); padding-left: 1.25rem; }
+  .meta-label {
+    font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 0.35rem;
+  }
+  .meta-value { font-size: 0.95rem; font-weight: 700; color: var(--text); }
+  .tag-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+  .tag {
+    font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em;
+    padding: 0.3rem 0.75rem; border: 1px solid var(--border-accent); border-radius: 2px;
+    color: var(--muted); text-transform: uppercase;
+  }
+
+  /* ─── RESEARCH ─── */
+  .research-list { display: flex; flex-direction: column; gap: 0; }
+  .research-item {
+    display: grid; grid-template-columns: 80px 1fr;
+    gap: 2rem; padding: 2rem 0; border-top: 1px solid var(--border);
+    transition: background 0.2s;
+  }
+  .research-item:last-child { border-bottom: 1px solid var(--border); }
+  .research-year {
+    font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted);
+    padding-top: 0.25rem;
+  }
+  .research-content {}
+  .research-tag {
+    font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--accent2); margin-bottom: 0.5rem;
+    display: inline-block;
+  }
+  .research-title {
+    font-size: 1.15rem; font-weight: 700; margin-bottom: 0.6rem; line-height: 1.3;
+  }
+  .research-desc {
+    font-family: var(--font-serif); font-size: 0.95rem; color: var(--muted);
+    line-height: 1.7; margin-bottom: 1rem;
+  }
+  .research-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .link-chip {
+    font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--text); text-decoration: none;
+    border-bottom: 1px solid var(--border-accent); padding-bottom: 1px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .link-chip:hover { color: var(--accent); border-color: var(--accent); }
+
+  /* ─── PROJECTS ─── */
+  .projects-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5px; background: var(--border);
+  }
+  .project-card {
+    background: var(--bg); padding: 2rem 1.75rem;
+    display: flex; flex-direction: column; gap: 0.75rem;
+    transition: background 0.2s;
+  }
+  .project-card:hover { background: var(--surface); }
+  .project-icon {
+    width: 36px; height: 36px; border-radius: 6px;
+    background: var(--surface2); display: flex; align-items: center; justify-content: center;
+    font-size: 18px; margin-bottom: 0.25rem;
+  }
+  .project-name { font-size: 1rem; font-weight: 700; }
+  .project-desc {
+    font-family: var(--font-serif); font-size: 0.88rem; color: var(--muted);
+    line-height: 1.65; flex: 1;
+  }
+  .project-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 0.5rem;
+  }
+  .lang-badge {
+    font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--muted);
+    display: flex; align-items: center; gap: 0.4rem;
+  }
+  .lang-dot {
+    width: 8px; height: 8px; border-radius: 50%; background: var(--accent2);
+    display: inline-block;
+  }
+  .star-count {
+    font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted);
+  }
+  .project-link {
+    font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--accent); text-decoration: none;
+  }
+  .project-link:hover { text-decoration: underline; }
+
+  /* ─── PUBLICATIONS ─── */
+  .pub-list { display: flex; flex-direction: column; gap: 0; }
+  .pub-item {
+    padding: 1.75rem 0; border-top: 1px solid var(--border);
+    display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-start: start;
+  }
+  .pub-item:last-child { border-bottom: 1px solid var(--border); }
+  .pub-venue {
+    font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem;
+  }
+  .pub-title {
+    font-size: 1rem; font-weight: 700; line-height: 1.35; margin-bottom: 0.4rem;
+  }
+  .pub-authors {
+    font-family: var(--font-serif); font-style: italic; font-size: 0.88rem;
+    color: var(--muted);
+  }
+  .pub-authors strong { font-style: normal; color: var(--text); font-weight: 400; }
+  .pub-year {
+    font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted);
+    white-space: nowrap; padding-top: 0.2rem;
+  }
+
+  /* ─── CONTACT ─── */
+  #contact { border-bottom: none; }
+  .contact-inner {
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+    gap: 1.5rem; max-width: 520px; margin: 0 auto;
+  }
+  .contact-big {
+    font-size: clamp(2.5rem, 7vw, 5rem); font-weight: 800;
+    letter-spacing: -0.03em; line-height: 1;
+  }
+  .contact-sub {
+    font-family: var(--font-serif); font-style: italic; color: var(--muted);
+    font-size: 1rem;
+  }
+  .contact-links { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 2rem 3rem; text-align: center;
+    font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted);
+    border-top: 1px solid var(--border);
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .fade-in {
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 4rem 1.5rem; }
+    #hero { padding: 7rem 1.5rem 4rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .research-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .research-year { padding-top: 0; }
+    .pub-item { grid-template-columns: 1fr; gap: 0.25rem; }
+    .pub-year { order: -1; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">gutev.dev</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid-bg"></div>
+  <p class="hero-eyebrow">PhD Researcher · Computer Vision &amp; Machine Learning</p>
+  <h1 class="hero-name">
+    Alexander<br><span class="line2">Gutev</span>
+  </h1>
+  <p class="hero-desc">
+    Building systems that see, understand, and reason about the visual world.
+    <!-- Based at [Your University / Lab]. -->
+  </p>
+  <div class="hero-links">
+    <a href="#research" class="btn btn-primary">View Research</a>
+    <a href="#contact" class="btn btn-outline">Get in Touch</a>
+    <a href="https://github.com/alex-gutev" class="btn btn-outline" target="_blank">GitHub</a>
+    <a href="https://github.com/sponsors/alex-gutev" class="btn btn-sponsor" target="_blank">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M8 14s-6-3.84-6-8a4 4 0 0 1 6-3.46A4 4 0 0 1 14 6c0 4.16-6 8-6 8z"/></svg>
+      Sponsor
+    </a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="max-w">
+    <p class="section-label fade-in">// 01 — About</p>
+    <h2 class="section-title fade-in">Researcher.<br><span class="dim">Builder. Open-sourcerer.</span></h2>
+    <div class="about-grid">
+      <div class="about-text fade-in">
+        <p>
+          I am a researcher working at the intersection of
+          computer vision, deep learning, and artificial intelligence.
+        </p>
+        <!-- <p>
+          Previously, I worked at [Previous Position / Institution]. I am passionate
+          about making research reproducible and open — most of my work is released
+          publicly on GitHub.
+        </p> -->
+        <div class="tag-list">
+          <span class="tag">Computer Vision</span>
+          <span class="tag">Deep Learning</span>
+          <span class="tag">Self-Supervised Learning</span>
+          <span class="tag">3D Reconstruction</span>
+          <span class="tag">PyTorch</span>
+        </div>
+      </div>
+      <div class="about-meta fade-in">
+        <div class="meta-block">
+          <div class="meta-label">Highest Degree</div>
+          <div class="meta-value">PhD (Completed)</div>
+        </div>
+        <div class="meta-block">
+          <div class="meta-label">Institution</div>
+          <div class="meta-value">University of Malta · Department of Communications and Computer Engineering</div>
+        </div>
+        <div class="meta-block">
+          <div class="meta-label">Email</div>
+          <div class="meta-value">alexander.gutev.15@um.edu.mt</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section id="research">
+  <div class="max-w">
+    <p class="section-label fade-in">// 02 — Research</p>
+    <h2 class="section-title fade-in">Research<!--<br><span class="dim">Work.</span>--></h2>
+    <div class="research-list">
+
+      <div class="research-item fade-in">
+        <div class="research-year">2021–2025</div>
+        <div class="research-content">
+          <span class="research-tag">Doctoral Research</span>
+          <h3 class="research-title">Understanding Activity in Private and Public Setups using 3D Video Content</h3>
+          <p class="research-desc">
+            My doctoral research investigated machine learning approaches to human action recognition, 
+            with a dual focus on efficiency and privacy. The first strand developed a novel motion 
+            saliency detection technique that identifies the most relevant spatial regions within video 
+            sequences, allowing action classification models to operate on a reduced subset of the data.
+            This yielded substantial gains in both training and inference speed, alongside a measurable 
+            reduction in energy consumption — all without sacrificing classification accuracy.
+            The second strand addressed deployment in privacy-sensitive environments where conventional
+            colour video cannot be used. Building on the saliency-based methods established earlier, 
+            a multimodal framework was devised that draws exclusively on depth data and skeleton joint
+            information. This approach not only preserved the efficiency improvements of the first 
+            phase but achieved classification accuracy surpassing existing state-of-the-art methods.          
+            The research produced five peer-reviewed publications across IEEE venues.
+          </p>
+          <!-- <div class="research-links">
+            <a href="#" class="link-chip">Paper →</a>
+            <a href="#" class="link-chip">Code →</a>
+            <a href="#" class="link-chip">Project Page →</a>
+          </div> -->
+        </div>
+      </div>
+
+      <!-- <div class="research-item fade-in">
+        <div class="research-year">2023–24</div>
+        <div class="research-content">
+          <span class="research-tag">Published · CVPR 2024</span>
+          <h3 class="research-title">Research Project Title Two</h3>
+          <p class="research-desc">
+            Describe a second strand of your research. What methods or datasets did you
+            develop? What are the key results and why do they matter?
+          </p>
+          <div class="research-links">
+            <a href="#" class="link-chip">arXiv →</a>
+            <a href="#" class="link-chip">Code →</a>
+            <a href="#" class="link-chip">Demo →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="research-item fade-in">
+        <div class="research-year">2022–23</div>
+        <div class="research-content">
+          <span class="research-tag">Published · NeurIPS 2023</span>
+          <h3 class="research-title">Research Project Title Three</h3>
+          <p class="research-desc">
+            A third project description. This is a good place to mention collaborators,
+            funding sources, or any broader impact beyond the immediate technical results.
+          </p>
+          <div class="research-links">
+            <a href="#" class="link-chip">arXiv →</a>
+            <a href="#" class="link-chip">Code →</a>
+          </div>
+        </div>
+      </div> -->
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="max-w">
+    <p class="section-label fade-in">// 03 — Open Source</p>
+    <h2 class="section-title fade-in">Projects &amp;<br><span class="dim">Tools.</span></h2>
+    <div class="projects-grid fade-in">
+
+      <div class="project-card">
+        <div class="project-icon">⚡</div>
+        <div class="project-name">Live Cells</div>
+        <div class="project-desc">
+          A reactive programming library for Dart, C++, Python and Common Lisp
+        </div>
+        <div class="project-footer">
+          <span class="lang-badge"><span class="lang-dot" style="background:#f5c864;"></span>Dart</span>
+          <span class="lang-badge"><span class="lang-dot"></span>Python</span>
+          <span class="lang-badge"><span class="lang-dot" style="background:#c864f5;"></span>C++</span>
+          <span class="lang-badge"><span class="lang-dot" style="background:#64f5c8;"></span>CL</span>
+          <!-- <span class="star-count">★ 10</span> -->
+        </div>
+        <a href="https://github.com/alex-gutev/live_cells" class="project-link" target="_blank">View on GitHub →</a>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon">🔬</div>
+        <div class="project-name">Wavesim 2D</div>
+        <div class="project-desc">
+          A simulator for 2D waves through a vector field medium
+        </div>
+        <div class="project-footer">
+          <span class="lang-badge"><span class="lang-dot" style="background:#f5c864;"></span>Dart</span>
+          <span class="lang-badge"><span class="lang-dot" style="background:#6472f5;"></span>WebGPU</span>
+          <!-- <span class="star-count">★ 187</span> -->
+        </div>
+        <a href="https://github.com/alex-gutev/wavesim" class="project-link" target="_blank">View on GitHub →</a>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon">🧠</div>
+        <div class="project-name">Generic-CL</div>
+        <div class="project-desc">
+          Provides a generic function interface to functions in the Common Lisp standard,
+          allowing them to be extended to user-defined classes.
+        </div>
+        <div class="project-footer">
+          <span class="lang-badge"><span class="lang-dot" style="background:#64f5c8;"></span>Common Lisp</span>
+          <!-- <span class="star-count">★ 93</span> -->
+        </div>
+        <a href="https://github.com/alex-gutev/generic-cl" class="project-link" target="_blank">View on GitHub →</a>
+      </div>
+
+      <!-- <div class="project-card">
+        <div class="project-icon">📊</div>
+        <div class="project-name">project-four</div>
+        <div class="project-desc">
+          A fourth project. A visualization tool, dataset loader, or evaluation
+          harness that others in your field might find useful.
+        </div>
+        <div class="project-footer">
+          <span class="lang-badge"><span class="lang-dot" style="background:#64f5c8;"></span>Python</span>
+          <span class="star-count">★ 61</span>
+        </div>
+        <a href="https://github.com/yourusername/project-four" class="project-link" target="_blank">View on GitHub →</a>
+      </div> -->
+
+    </div>
+  </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section id="publications">
+  <div class="max-w">
+    <p class="section-label fade-in">// 04 — Publications</p>
+    <h2 class="section-title fade-in">Selected<br><span class="dim">Papers.</span></h2>
+    <div class="pub-list">
+
+      <div class="pub-item fade-in">
+        <div>
+          <div class="pub-venue">EUVIP 2025</div>
+          <div class="pub-title">Depth-based Human Action Recognition for Private Settings using Motion Saliency Detection</div>
+          <div class="pub-authors"><strong>Alexander Gutev</strong>, Carl James Debono</div>
+          <div style="margin-top:0.75rem;"><a href="https://ieeexplore.ieee.org/document/11238648" class="link-chip">PDF →</a><!--&nbsp;&nbsp;<a href="#" class="link-chip">arXiv →</a>&nbsp;&nbsp;<a href="#" class="link-chip">Code →</a>--></div>
+        </div>
+        <div class="pub-year">2025</div>
+      </div>
+
+      <div class="pub-item fade-in">
+        <div>
+          <div class="pub-venue">AICCONF 25</div>
+          <div class="pub-title">A Fused Modality Human Action Recognition System Based on Motion Saliency in RGBD Videos</div>
+          <div class="pub-authors"><strong>Alexander Gutev</strong>, Carl James Debono</div>
+          <div style="margin-top:0.75rem;"><a href="https://ieeexplore.ieee.org/document/11064223" class="link-chip">PDF →</a><!--&nbsp;&nbsp;<a href="#" class="link-chip">arXiv →</a>--></div>
+        </div>
+        <div class="pub-year">2025</div>
+      </div>
+
+      <div class="pub-item fade-in">
+        <div>
+          <div class="pub-venue">ICCP 2024</div>
+          <div class="pub-title">Motion Saliency Based Human Action Recognition in RGBD Videos</div>
+          <div class="pub-authors"><strong>Alexander Gutev</strong>, Carl James Debono</div>
+          <div style="margin-top:0.75rem;"><a href="https://ieeexplore.ieee.org/document/10793009" class="link-chip">PDF →</a><!--&nbsp;&nbsp;<a href="#" class="link-chip">Project →</a>--></div>
+        </div>
+        <div class="pub-year">2024</div>
+      </div>
+
+      <div class="pub-item fade-in">
+        <div>
+          <div class="pub-venue">MELECON 2024</div>
+          <div class="pub-title">Motion Saliency Based Human Action Recognition in RGBD Videos</div>
+          <div class="pub-authors"><strong>Alexander Gutev</strong>, Carl James Debono</div>
+          <div style="margin-top:0.75rem;"><a href="https://ieeexplore.ieee.org/document/10793009" class="link-chip">PDF →</a></div>
+        </div>
+        <div class="pub-year">2024</div>
+      </div>
+
+      <div class="pub-item fade-in">
+        <div>
+          <div class="pub-venue">ELMAR 2023</div>
+          <div class="pub-title">Motion Saliency Detection using Depth Information for Human Action Recognition Applications</div>
+          <div class="pub-authors"><strong>Alexander Gutev</strong>, Carl James Debono</div>
+          <div style="margin-top:0.75rem;"><a href="https://ieeexplore.ieee.org/document/10253928" class="link-chip">PDF →</a></div>
+        </div>
+        <div class="pub-year">2023</div>
+      </div>
+
+      <div class="pub-item fade-in">
+        <div>
+          <div class="pub-venue">EUROCON 2021</div>
+          <div class="pub-title">Improved Object Tracking Throughout Occlusions</div>
+          <div class="pub-authors"><strong>Alexander Gutev</strong>, Carl James Debono</div>
+          <div style="margin-top:0.75rem;"><a href="https://ieeexplore.ieee.org/document/9535624" class="link-chip">PDF →</a></div>
+        </div>
+        <div class="pub-year">2021</div>
+      </div>
+
+      <div class="pub-item fade-in">
+        <div>
+          <div class="pub-venue">EUROCON 2019</div>
+          <div class="pub-title">Exploiting depth information to increase object tracking robustness</div>
+          <div class="pub-authors"><strong>Alexander Gutev</strong>, Carl James Debono</div>
+          <div style="margin-top:0.75rem;"><a href="https://ieeexplore.ieee.org/document/8861628" class="link-chip">PDF →</a></div>
+        </div>
+        <div class="pub-year">2019</div>
+      </div>
+
+    </div>
+    <div style="margin-top:2rem;" class="fade-in">
+      <a href="https://scholar.google.com/citations?user=nayKusUAAAAJ&hl=en" class="btn btn-outline" target="_blank">Full list on Google Scholar →</a>
+      <a href="https://ieeexplore.ieee.org/author/37087040722" class="btn btn-outline" target="_blank">Full list on IEEE Xplore →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <p class="section-label fade-in">// 05 — Contact</p>
+    <h2 class="contact-big fade-in">Let's<br>talk.</h2>
+    <p class="contact-sub fade-in">
+      Open to collaborations, research discussions, and speaking invitations.
+    </p>
+    <div class="contact-links fade-in">
+      <a href="mailto:alex.gutev@gmail.com" class="btn btn-primary">Email Me</a>
+      <!-- <a href="https://twitter.com/yourhandle" class="btn btn-outline" target="_blank">Twitter / X</a> -->
+      <a href="https://github.com/alex-gutev" class="btn btn-outline" target="_blank">GitHub</a>
+      <a href="https://www.linkedin.com/in/alexander-gutev-638533b5/" class="btn btn-outline" target="_blank">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Your Name · Built with plain HTML — <a href="https://github.com/alex-gutev/alex-gutev.github.io" style="color:var(--muted);text-decoration:none;">View source</a></p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
